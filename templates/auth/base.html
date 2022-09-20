@@ -5,8 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ur_for('public, filename ='style.css')}}">
 </head>
 <body>
+
+    <nav class="logo">
+        <label for="" class="logo"> LIFECHAT </label>
+        <ul class="Principal">
+            <li>
+                <a href="login.html">Login</a>
+            </li>
+
+            <li>
+                <a href="registro.html">Registro</a>
+            </li>
+
+        </ul>
+    </nav>
+
     {% block content %} {% endblock %}
 </body>
 </html>
