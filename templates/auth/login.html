@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="login">
+        <form id="login-form" action="" method="post">
+            {{ form.hidden_tag}} <!--Requerido. Siempre al principio-->
+
+            <div class="form-field">
+                {{ form.email.label}}
+                {{ form.email}}
+                {% for error in form.email.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-field">
+                {{ form.password.label}}
+                {{ form.password}}
+                {% for error in form.password.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{form.submit()}}
+            </div>
+        </form>
+    </div>
+
+    <div>
+        Don't have an account? <a href="{{url_for ('registro')}}">Sign in</a>
+    </div>
+
+    
+    <section class="form-register">
+        <h1>Inicia Sesion</h1>
+        <input class="controls" type="text" name="email" id="email" placeholder="Ingresa su Email">
+        <input class="controls" type="text" name="correo" id="correo" placeholder="Ingresa su contaseña">
+        <p><a href="#">¿Has olvidado tu contraseña?</a> </p>
+        <input class="botons" type="submit" value="Continuar">
+        
+    </section>    
+
+{% endblock %}
