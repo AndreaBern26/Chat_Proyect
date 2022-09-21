@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title%}Login{% endblock %}
+
+{% block content %}
+
+<div class="login">
+    <form class="login_2" action="./login.html" method="post">
+        {{ form.hidden_tag}}
+        <!--Requerido. Siempre al principio-->
+        <div class="form-field">
+            <label>Name:</label>
+            <input type="text" class="form-input" name="Name">
+
+        </div>
+
+        <div class="form-field">
+            <label>Email:</label>
+            <input type="text" class="form-input" name="Email">
+
+        </div>
+
+        <div class="form-field">
+            <label>password</label>
+            <input type="password" class="password" name="Password">
+            {% for error in form.password.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            Estoy de acuerdo con los <a href="#">Terminos y condiciones</a>
+        </div>
+
+        <div>
+            <a href="./login.html">¿Ya tengo Cuenta?</a>
+        </div>
+        <div>
+            <input class="botons" type="submit" value="Login">
+            {{form.submit()}}
+        </div>
+    </form>
+</div>
+
+{% endblock %}
