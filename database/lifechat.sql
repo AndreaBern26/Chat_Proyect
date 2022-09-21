@@ -87,6 +87,8 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `connected` tinyint DEFAULT NULL,
+  `is_admin` tinyint DEFAULT NULL,
+  `userscol` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -99,7 +101,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Nina','nina23@gmail.com','Nosequeponer',1),(2,'myUser','user@hotmail.com','afjaofhoa',0);
+INSERT INTO `users` VALUES (1,'Nina','nina23@gmail.com','Nosequeponer',1,NULL,NULL),(2,'myUser','user@hotmail.com','afjaofhoa',0,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -112,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-20 12:42:00
+-- Dump completed on 2022-09-21 11:35:01
