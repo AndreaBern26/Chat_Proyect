@@ -1,6 +1,6 @@
-from model import Users
+from models import User
 
 
-def delete(user:Users):
+def delete(user:User):
     del user
 
