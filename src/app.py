@@ -1,10 +1,10 @@
-from flask import Flask, render_template
-from blueprints import user
-
+from flask import Flask, url_for, request, redirect, render_template, make_response
+from flask_login import LoginManager, login_user, current_user
+from forms.LoginForm import LoginForm
+from forms.RegisterForm import RegisterForm
+from models.User import User, getUser, users
 
 app = Flask(__name__, template_folder="templates")
-app.register_blueprint(user)
-
 
 @app.route('/')
 def home():
