@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `global_messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `global_messages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
   `message_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
-  CONSTRAINT `fk_global_message_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `fk_global_messages_user_id` (`user_id`),
+  CONSTRAINT `fk_global_messages_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `global_messages` (
 
 LOCK TABLES `global_messages` WRITE;
 /*!40000 ALTER TABLE `global_messages` DISABLE KEYS */;
-INSERT INTO `global_messages` VALUES (2,1,'Hola','2022-09-19 19:53:22'),(3,2,'Holaaa','2022-09-19 19:53:43');
 /*!40000 ALTER TABLE `global_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,17 +50,17 @@ DROP TABLE IF EXISTS `messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `messages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_to` int NOT NULL,
-  `user_from` int NOT NULL,
-  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `user_to` varchar(255) DEFAULT NULL,
+  `user_from` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
   `message_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_messages_user_to` (`user_to`),
   KEY `fk_messages_user_from` (`user_from`),
   CONSTRAINT `fk_messages_user_from` FOREIGN KEY (`user_from`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_messages_user_to` FOREIGN KEY (`user_to`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +69,6 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,1,2,'Qué tal?','2022-09-19 19:56:56'),(2,2,1,'Bien y tú?','2022-09-19 19:57:15'),(3,1,2,'Bieen','2022-09-19 19:57:58');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,17 +80,16 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `id` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `connected` tinyint DEFAULT NULL,
   `is_admin` tinyint DEFAULT NULL,
-  `userscol` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +98,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Nina','nina23@gmail.com','Nosequeponer',1,NULL,NULL),(2,'myUser','user@hotmail.com','afjaofhoa',0,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 11:35:01
+-- Dump completed on 2022-09-22 13:09:10
