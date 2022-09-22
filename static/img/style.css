@@ -1,0 +1,16 @@
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+
+/*-------------------------------------------------FORMULARIO-----------------------------------------------*/
+ .for-login{
+    background: red;
+ }
+
+ .for-login .mb-3 .form-label{
+    background: red;
+ }

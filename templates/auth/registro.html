@@ -2,9 +2,12 @@
 {% block title%}Login{% endblock %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' ) }}">
+</head>
 
 <div class="login">
-    <form class="login_2" action="./login.html" method="post">
+    <form class="login_2" action="./registro.html" method="post">
         {{ form.hidden_tag}}
         <!--Requerido. Siempre al principio-->
         <div class="form-field">
