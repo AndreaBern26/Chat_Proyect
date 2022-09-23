@@ -10,10 +10,11 @@ auth = Blueprint('auth',__name__, url_prefix = '/auth')
 @auth.get('/login')
 def login_template():
     """
-    Return the login template with a login form
+    If the user is correctly authenticated, returns a redirect to home 
+    page. If not, the user will stay in the login page.
     
-    :return: a login form
-    :rtype: form
+    :return: a redirect or the login template.
+    :rtype: path
     """
 
     if current_user.is_authenticated:
@@ -32,6 +33,8 @@ def login():
     the user will be redirect to homepage, if not, the user
     will stay in login page and will have to fill the form again.
 
+    :return: a redirect or the login template.
+    :rtype: path
     """
 
     try:
@@ -51,13 +54,15 @@ def login():
 
 @auth.get('/register')
 def register_template():
-    """
-    Return the register template with a register form
-    
-    :return: a register form
-    :rtype: form
 
     """
+    If the user is correctly authenticated, returns a redirect to home 
+    page. If not, the user will stay in the register page.
+    
+    :return: a redirect or the register template.
+    :rtype: path
+    """
+
     if current_user.is_authenticated:
         return redirect( url_for ('home'))
     
@@ -75,6 +80,7 @@ def register():
     
         · If values of register form are incorrect, the users will be stay in
             register template and will have to fill the form again.
+    
     """
 
     try:
@@ -100,5 +106,11 @@ def register():
 
 @auth.get('/logout')
 def logout():
+    """
+    Allows users to log out from their account
+
+    :return: a redirect to login form.
+    :rtype: path
+    """
     logout_user()
     return redirect(url_for('login_template'))
