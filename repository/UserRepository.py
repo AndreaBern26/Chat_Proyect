@@ -6,7 +6,7 @@ class UserRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Ironhack_1',
+        password='Coders_1',
         database='db_lifechat'
     )
 
@@ -32,22 +32,22 @@ class UserRepository():
         user_list = []
         cursor = self.connection.cursor(dictionary=True)
         cursor.execute('select * from users')
-        rows = cursor.fetchall()
-        for row in rows:
-            user_list.append(self.__compound_user(row))
-        cursor.close()
+        #rows = cursor.fetchall()
+        # for row in rows:
+        #     user_list.append(self.__compound_user(row))
+        # cursor.close()
         return user_list
 
 
-    def __compound_user(self, row):
-        if row is None:
-            return None
+    # def __compound_user(self, row):
+    #     if row is None:
+    #         return None
 
-        user = User(
-            row['username'],
-            row['email'],
-            row['password'],
-            row['is_admin']
-                    )
-        user.id = row['id']
-        user.password = row['password']
+    #     user = User(
+    #         row['username'],
+    #         row['email'],
+    #         row['password'],
+    #         row['is_admin']
+    #                 )
+    #     user.id = row['id']
+    #     user.password = row['password']
