@@ -1,34 +1,27 @@
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
-
 {% block content %}
-    <div class="login">
-        <form class="login_2" action="./login.html" method="post">
-            {{ form.hidden_tag}} <!--Requerido. Siempre al principio-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='img/style.css')}}">
+</head>
+<body>  
 
-            <div class="form-field">
-                <label>Email:</label>
-                <input type="text" class="form-input" name="Email">
-                
-            </div>
-
-            <div class="form-field">
-                <label>password</label>
-                <input type="password" class="password" name="Password">
-                {% for error in form.password.errors %}
-                    <span>{{error}}</span>
-                {% endfor %}
-            </div>
-            <div>
-                <input class="botons" type="submit" value="Login">
-                {{form.submit()}}
-            </div>
-        </form>
+<form class="for-login" action="./login.html" method="post">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1">
     </div>
-
-    <div>
-        Don't have an account? <a href="registro.html">Sign in</a>
-    </div>
-
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</body>
+</html>
     
 {% endblock %}
