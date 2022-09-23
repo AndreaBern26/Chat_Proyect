@@ -3,15 +3,15 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, ValidationError, Length
 
-from models.User import users
+from models.User import User
 
 def uniqueEmail(form,field):
-    for user in users:
+    for user in user:
         if user['email'] == field.data:
             raise ValidationError('Email already exists')
 
 def uniqueUsername(form,field):
-    for user in users:
+    for user in user:
         if user['username'] == field.data:
             raise ValidationError('Username already exists')
 
