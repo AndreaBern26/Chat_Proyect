@@ -10,6 +10,20 @@ class UserRepository():
         database='db_lifechat'
     )
 
+    def get_user_by_email(self, email: str):
+        cursor = self.connection.cursor(dictionary=True)
+        cursor.execute('select * from users where email = %s', (email,))
+        user = self.__compound_user(cursor.fetchone())
+        cursor.close()
+        return user
+
+    def add(self, user: User):
+        cursor = self.connection.cursor()
+        cursor.execute('insert into users values (%s,%s,%s, %s)', (user.id, user.username, user.email, user.password))
+        self.connection.commit()
+        cursor.close()
+    
+    
     def send_global_message(message:str):
         return True
 
@@ -36,15 +50,18 @@ class UserRepository():
         return user_list
 
 
-    # def __compound_user(self, row):
-    #     if row is None:
-    #         return None
+    def __compound_user(self, row):
+        if row is None:
+            return None
 
-    #     user = User(
-    #         row['username'],
-    #         row['email'],
-    #         row['password'],
-    #         row['is_admin']
-    #                 )
-    #     user.id = row['id']
-    #     user.password = row['password']
+        user = User(
+            row['username'],
+            row['email'],
+            row['password'],
+            row['is_admin']
+        )
+
+        user.id = row['id']
+        user.password = row['password']
+    
+        return user

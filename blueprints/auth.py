@@ -6,6 +6,7 @@ from forms.RegisterForm import RegisterForm
 from models.User import User
 from repository.UserRepository import UserRepository
 
+
 auth = Blueprint('auth',__name__, url_prefix = '/auth')
 
 @auth.get('/login')
@@ -44,8 +45,6 @@ def login():
         if form.validate_on_submit():
             user_repository = UserRepository()
             user = user_repository.get_user_by_email(form.email.data)
-
-
 
             if user is not None and user.check_password(form.password.data):
                 login_user(user, remember = True)
@@ -86,7 +85,6 @@ def register():
             register template and will have to fill the form again.
     
     """
-
     try:
         form = RegisterForm()
 
@@ -95,8 +93,9 @@ def register():
             email = form.email.data
             password = form.password.data
 
-            user = User (username, email, password)
-            users.append(user)
+            user = User(username, email, password)
+            user_repository = UserRepository()
+            user_repository.add(user)
 
             login_user(user, remember = True) #Recuérdame activado.
 
