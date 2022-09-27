@@ -1,27 +1,33 @@
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='img/style.css')}}">
-</head>
-<body>  
+{% extends '/_partials/base.html'%}
+{% block title %}Iniciar sesión {% endblock %}
 
-<form class="for-login" action="./login.html" method="post">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+{% block content%}
+    <div class="d-flex w-100 justify-content-center p-3 align-items-center min-vh-100">
+        <div class="border border-1 p-5 rounded-4 bg-black">
+            <form id="login-form" action="./login" method="post">
+                {{ form.csrf_token }}
+                <div class="form-field">
+                    {{ form.email.label(class_="form-label text-white") }}
+                    {{ form.email(class_="form-control text-black") }}
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-field">
+                    {{ form.password.label(class_="form-label text-white") }}
+                    {{ form.password(class_="form-control text-black") }}
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    {{ form.submit(class_="btn btn-warning mt-4") }}
+                </div>
+                <div class="d-inline-block mt-4 text-white">
+                    ¿No estás registrado?<a class="text-decoration-none text-warning fw-bold" href="{{ url_for('auth.register_template') }}"> Registro</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</body>
-</html>
-    
+
 {% endblock %}

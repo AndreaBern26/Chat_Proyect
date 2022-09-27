@@ -14,7 +14,7 @@ app.register_blueprint(users)
 
 #Login
 login_manager = LoginManager(app)
-login_manager.login_view = 'login_template' #Nombre de la vista de inicio de sesión
+login_manager.login_view = 'auth.login_template' #Nombre de la vista de inicio de sesión
 
 @login_manager.user_loader
 def load_user(id):
@@ -29,9 +29,9 @@ def load_user(id):
 @app.get('/')
 def home():
     flash('You were sucessfully logged in')
-    return render_template('index.html')
+    return render_template('home.html')
 
-app.get('/global')
+@app.get('/global')
 def get_global_chat():
     return render_template('global_chat.html')
 

@@ -6,23 +6,20 @@ class UserRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Coders_1',
+        password='SomosCoders2022',
         database='db_lifechat'
     )
 
-
-
-    def sendGlobalMessage(message:str):
+    def send_global_message(message:str):
         return True
 
-    def sendMessage(message:str):
+    def send_message(message:str):
         return True
 
-    def deleteMessage(id:int):
+    def delete_message(id:int):
         return True
 
-
-    def deleteAccount(self):
+    def delete_account(self):
         cursor = self.connection.cursor()
         cursor.execute('delete from users where id = %s', (self.id))
         self.connection.commit()

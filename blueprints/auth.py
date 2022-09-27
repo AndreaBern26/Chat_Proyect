@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 from models.User import User
+from repository.UserRepository import UserRepository
 
 auth = Blueprint('auth',__name__, url_prefix = '/auth')
 
@@ -22,7 +23,7 @@ def login_template():
     
     form = LoginForm()
 
-    return render_template('templates/auth/login.html', form = form)
+    return render_template('auth/login.html', form = form)
 
 
 @auth.post('/login')
@@ -41,13 +42,16 @@ def login():
         form = LoginForm()
 
         if form.validate_on_submit():
-            user = get_user(email = form.email.data)
+            user_repository = UserRepository()
+            user = user_repository.get_user_by_email(form.email.data)
+
+
 
             if user is not None and user.check_password(form.password.data):
                 login_user(user, remember = True)
                 return redirect( url_for('home'))
         
-        return render_template('templates/auth/login.html', form = form)
+        return render_template('auth/login.html', form = form)
 
     except Exception as e:
         return make_response(e.__str__(), 400)
@@ -67,7 +71,7 @@ def register_template():
         return redirect( url_for ('home'))
     
     form = RegisterForm()
-    return render_template('templates/auth/register.html', form = form)
+    return render_template('auth/registro.html', form = form)
 
 @auth.post('/register')
 def register():
@@ -98,7 +102,7 @@ def register():
 
             return redirect('home')
         
-        return render_template('templates/auth/registro.html', form = form)
+        return render_template('auth/registro.html', form = form)
 
     except Exception as e:
         return make_response(e.__str__(),400)
