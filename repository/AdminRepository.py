@@ -1,8 +1,6 @@
 import mysql.connector
 from models.User import User
 
-
-
 class AdminRepository():
 
     connection = mysql.connector.connect(

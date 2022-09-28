@@ -1,5 +1,6 @@
+import logging
 from flask import Flask,g, render_template, flash
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required
 
 from blueprints.auth import auth
 from blueprints.users import users
@@ -27,15 +28,16 @@ def load_user(id):
     return None
 
 @app.get('/')
+@login_required
 def home():
     flash('You were sucessfully logged in')
     return render_template('home.html')
 
 @app.get('/global')
+@login_required
+
 def get_global_chat():
     return render_template('global_chat.html')
-
-
 
 if __name__ == "__main__":
     app.run()

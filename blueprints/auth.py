@@ -6,7 +6,6 @@ from forms.RegisterForm import RegisterForm
 from models.User import User
 from repository.UserRepository import UserRepository
 
-
 auth = Blueprint('auth',__name__, url_prefix = '/auth')
 
 @auth.get('/login')
@@ -41,6 +40,7 @@ def login():
 
     try:
         form = LoginForm()
+        
         if form.validate_on_submit():
             user_repository = UserRepository()
             user = user_repository.get_user_by_email(form.email.data)
