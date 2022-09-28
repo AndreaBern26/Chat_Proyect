@@ -8,7 +8,7 @@ class AdminRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Coders_1',
+        password='SomosCoders2022',
         database='db_lifechat'
     )
 
