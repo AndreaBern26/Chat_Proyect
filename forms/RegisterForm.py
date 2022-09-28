@@ -3,8 +3,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, ValidationError, Length
 
-from models.User import User
-
 def uniqueEmail(form,field):
     for user in user:
         if user['email'] == field.data:

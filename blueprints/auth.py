@@ -6,7 +6,6 @@ from forms.RegisterForm import RegisterForm
 from models.User import User
 from repository.UserRepository import UserRepository
 
-
 auth = Blueprint('auth',__name__, url_prefix = '/auth')
 
 @auth.get('/login')
@@ -26,7 +25,6 @@ def login_template():
 
     return render_template('auth/login.html', form = form)
 
-
 @auth.post('/login')
 
 def login():
@@ -41,7 +39,7 @@ def login():
 
     try:
         form = LoginForm()
-
+        
         if form.validate_on_submit():
             user_repository = UserRepository()
             user = user_repository.get_user_by_email(form.email.data)
@@ -57,7 +55,6 @@ def login():
 
 @auth.get('/register')
 def register_template():
-
     """
     If the user is correctly authenticated, returns a redirect to home 
     page. If not, the user will stay in the register page.
@@ -105,7 +102,6 @@ def register():
 
     except Exception as e:
         return make_response(e.__str__(),400)
-
 
 @auth.get('/logout')
 def logout():

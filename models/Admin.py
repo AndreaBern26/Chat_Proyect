@@ -1,4 +1,4 @@
-from models import User
+from models.User import User
 
 class Admin(User):
     def __init__(self, username, email, password, is_admin=True):
