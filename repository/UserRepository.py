@@ -1,4 +1,4 @@
-from models import User
+from models.User import User
 import mysql.connector
 
 class UserRepository():
@@ -6,7 +6,7 @@ class UserRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Coders_1',
+        password='SomosCoders2022',
         database='db_lifechat'
     )
 

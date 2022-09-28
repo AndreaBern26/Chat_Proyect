@@ -41,7 +41,6 @@ def login():
 
     try:
         form = LoginForm()
-
         if form.validate_on_submit():
             user_repository = UserRepository()
             user = user_repository.get_user_by_email(form.email.data)
