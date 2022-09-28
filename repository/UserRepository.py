@@ -6,7 +6,7 @@ class UserRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='SomosCoders2022',
+        password='Coders_1',
         database='db_lifechat'
     )
 
@@ -43,7 +43,7 @@ class UserRepository():
         user_list = []
         cursor = self.connection.cursor(dictionary=True)
         cursor.execute('select * from users')
-        #rows = cursor.fetchall()
+        # rows = cursor.fetchall()
         # for row in rows:
         #     user_list.append(self.__compound_user(row))
         # cursor.close()

@@ -8,10 +8,19 @@ class AdminRepository():
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Coders_1',
         database='db_lifechat'
     )
 
+    def list_all(self):
+        user_list = []
+        cursor = self.connection.cursor(dictionary=True)
+        cursor.execute('select * from users')
+        #rows = cursor.fetchall()
+        # for row in rows:
+        #     user_list.append(self.__compound_user(row))
+        # cursor.close()
+        return user_list
 
     def create_user(self, user:User):
 
