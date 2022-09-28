@@ -25,7 +25,6 @@ def login_template():
 
     return render_template('auth/login.html', form = form)
 
-
 @auth.post('/login')
 
 def login():
@@ -56,7 +55,6 @@ def login():
 
 @auth.get('/register')
 def register_template():
-
     """
     If the user is correctly authenticated, returns a redirect to home 
     page. If not, the user will stay in the register page.
@@ -104,7 +102,6 @@ def register():
 
     except Exception as e:
         return make_response(e.__str__(),400)
-
 
 @auth.get('/logout')
 def logout():

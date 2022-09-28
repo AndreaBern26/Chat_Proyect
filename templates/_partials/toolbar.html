@@ -1,8 +1,8 @@
 
 <div class="d-flex p-3 w-100 shadow-sm bg-black">
     <div class="d-flex flex-grow-1">
-        <a class="text-decoration-none text-white p-1 me-3" href="#"><span>Home</span></a>
-        <a class="text-decoration-none text-white p-1 ms-3" href="#">Global Chat</a>
+        <a class="text-decoration-none text-white p-1 me-3" href="{{url_for('home')}}"><span>Home</span></a>
+        <a class="text-decoration-none text-white p-1 ms-3" href="{{url_for('global_chat')}}">Global Chat</a>
         <div class="d-inline-flex flex-grow-1 justify-content-end">
             {% if g.user is defined %}
                 <a class="btn btn-info float-end align-self-end " href="#">Log out</a>
