@@ -13,14 +13,14 @@
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
-                <div class="form-field">
+                <div class="form-field mt-2">
                     {{ form.password.label(class_="form-label text-white") }}
                     {{ form.password(class_="form-control text-black") }}
                     {% for error in form.password.errors %}
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
-                <div class="row">
+                <div class="row mt-2">
                     {{ form.submit(class_="btn btn-warning mt-4") }}
                 </div>
                 <div class="d-inline-block mt-4 text-white">
