@@ -11,8 +11,9 @@ class Messages(Base):
     user_to = Column(String(255), ForeignKey("users.id"))
     user_from = Column(String(255), ForeignKey("users.id"))
     message = Column(String(255))
-    message_date = Column(DateTime)
-    
+    message_date = Column(DateTime())
+    user = relationship("User")
+
 
 
 

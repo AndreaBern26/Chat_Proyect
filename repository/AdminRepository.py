@@ -1,14 +1,7 @@
-import mysql.connector
 from models.User import User
 
-class AdminRepository():
 
-    connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='SomosCoders2022',
-        database='db_lifechat'
-    )
+class AdminRepository():
 
     def list_all(self):
         user_list = []

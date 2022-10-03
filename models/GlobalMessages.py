@@ -1,8 +1,8 @@
 import uuid
-from xmlrpc.client import DateTime
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, DateTime
 from models.base import Base
+from models.User import User
 
 
 class GlobalMessage(Base):
@@ -12,10 +12,11 @@ class GlobalMessage(Base):
     user_id = Column(String(255), ForeignKey("users.id"))
     message = Column(String(255))
     message_date = Column(DateTime)
+    user = relationship("User", back_populates="global_messages")
 
-    id = uuid.uuid4()
 
     def __init__(self, user_id, message, message_date):
+        self.id = uuid.uuid4()
         self.user_id = user_id
         self.message = message
         self.message_date = message_date

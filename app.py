@@ -2,6 +2,7 @@
 from flask import Flask,g, render_template, flash
 from flask_login import LoginManager, login_required
 from flask_socketio import SocketIO, send
+from flask_mysqldb import MySQL
 
 from blueprints.auth import auth
 from blueprints.users import users
