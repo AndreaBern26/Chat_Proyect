@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, make_response
 from datetime import datetime
 
 from forms.global_chat_form import GlobalForm
-from repository.global_message_repository import GlobalMessageRepository
+from repository.g_message_repository import GlobalMessageRepository
 
 g_message = Blueprint('global', __name__, url_prefix='/global')
 
