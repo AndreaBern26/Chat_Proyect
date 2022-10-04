@@ -1,5 +1,5 @@
 import abc
-import os
+import os 
 
 from models.base import Base
 from sqlalchemy import create_engine
@@ -10,4 +10,3 @@ class AbstractRepository(abc.ABC):
     Base.metadata.create_all(engine, checkfirst = True)
     Session = sessionmaker(bind = engine)
     session = Session()
-
