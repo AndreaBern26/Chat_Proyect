@@ -3,8 +3,8 @@ from flask_login import current_user, login_user, logout_user
 
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
-from models.User import User
-from repository.UserRepository import UserRepository
+from models.users import User
+from repository.user_repository import UserRepository
 
 auth = Blueprint('auth',__name__, url_prefix = '/auth')
 

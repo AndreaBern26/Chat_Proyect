@@ -1,11 +1,11 @@
 
-from flask import Flask,g, render_template, flash
+from flask import Flask, g, render_template, flash
 from flask_login import LoginManager, login_required
 from flask_socketio import SocketIO, send
 
 from blueprints.auth import auth
 from blueprints.users import users
-
+from blueprints.global_message import g_message
 
 app = Flask(__name__, template_folder="templates")
 app.config['SECRET_KEY'] = '6d0ad83754dbb3d7c2f5ffc117255906dd3d763b5447b7c9475b3eeccadd348d'
@@ -13,19 +13,16 @@ app.config['SECRET_KEY'] = '6d0ad83754dbb3d7c2f5ffc117255906dd3d763b5447b7c9475b
 #SocketIO
 socketio = SocketIO(app) # Inicializa la conexión del socketIO
 
-@socketio.on('message')
+
+@socketio.on('message') #Escucha un evento particular(message)
 def handle_message(msg):
     print("Message:" + msg)
-    send(msg, broadcast = True)
-
-
-
-
-
+    send(msg, broadcast = True) #True para enviar el mensaje a todos los usuarios conectados
 
 #Blueprints
 app.register_blueprint(auth)
 app.register_blueprint(users)
+app.register_blueprint(g_message)
 
 #Login
 login_manager = LoginManager(app)
@@ -46,10 +43,5 @@ def home():
     flash('You were sucessfully logged in')
     return render_template('home.html')
 
-@app.get('/global')
-def global_chat():
-    return render_template('global_chat.html')
-
 if __name__ == "__main__":
-    app.run()
-    socketio.run(app)
+    socketio.run(app) #Para tener la funcionalidad real-time en la app

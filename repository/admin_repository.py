@@ -1,5 +1,5 @@
 import mysql.connector
-from models.User import User
+from models.users import User
 
 class AdminRepository():
 

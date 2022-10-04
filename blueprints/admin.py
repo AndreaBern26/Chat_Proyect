@@ -3,8 +3,8 @@ from flask_login import login_required
 from werkzeug.utils import secure_filename
 from forms import CreateForm
 
-from models.User import User
-from repository.AdminRepository import AdminRepository
+from models.users import User
+from repository.admin_repository import AdminRepository
 
 
 

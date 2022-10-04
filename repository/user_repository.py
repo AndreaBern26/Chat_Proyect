@@ -1,4 +1,4 @@
-from models.User import User
+from models.users import User
 import mysql.connector
 
 class UserRepository():
