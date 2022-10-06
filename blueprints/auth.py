@@ -48,22 +48,24 @@ def register_template():
 
 @auth.post('/register')
 def register():
+    
     try:
         form = RegisterForm()
-
+        
         if form.validate_on_submit():
             username = form.username.data
             email = form.email.data
             password = form.password.data
-
+            
             user = User(username, email, password, is_admin = False)
             user_repository = UserRepository()
             user_repository.add(user)
             
             login_user(user, remember = True)
             user_repository.connected(user, True)
-            
             return redirect(url_for('home'))
+            
+           
         
         return render_template('auth/register.html', form = form)
     except Exception as e:

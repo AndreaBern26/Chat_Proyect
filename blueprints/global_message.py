@@ -1,27 +1,40 @@
 from flask import Blueprint, render_template, make_response
-from datetime import datetime
+from flask_login import current_user, login_required
 
 from forms.global_chat_form import GlobalForm
+from models.global_message import GlobalMessage
 from repository.g_message_repository import GlobalMessageRepository
 
 g_message = Blueprint('global', __name__, url_prefix='/global')
 
 @g_message.get('/')
+@login_required
 def global_chat_template():
-    form = GlobalForm()
-    return render_template('global_chat.html', form = form)
+    try:
+        g_message_repository = GlobalMessageRepository()
+        list = g_message_repository.list()
+        form = GlobalForm()
+
+        return render_template('global_chat.html', form=form, list=list)
+    except Exception as e:
+         return make_response(e.__str__(),400)
 
 @g_message.post('/')
+@login_required
 def global_chat():
     try:
         form = GlobalForm()
+        user = current_user
 
         if form.validate_on_submit():
             message = form.message.data
-            message_date = datetime.now()
-            
+            user_id = user.id
 
-        return render_template('global_chat.html', form = form)
+            g_message = GlobalMessage(message, user_id)
+            g_message_repository = GlobalMessageRepository()
+            g_message_repository.add(g_message)
+
+        return render_template('global_chat.html', form=form)
         
     except Exception as e:
         return make_response(e.__str__(),400)

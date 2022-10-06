@@ -1,6 +1,5 @@
-from xmlrpc.client import boolean
-from models.base import Base
 from models.users import User
+import models.users
 
 from repository.abstract_repository import AbstractRepository
 
