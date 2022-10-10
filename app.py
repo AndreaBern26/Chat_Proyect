@@ -1,7 +1,7 @@
 from flask import Flask, flash, g, render_template
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager, current_user
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send
 
 from blueprints.auth import auth
 from blueprints.global_message import g_message
@@ -11,6 +11,7 @@ from repository.user_repository import UserRepository
 
 app = Flask(__name__, template_folder = "templates")
 app.config['SECRET_KEY'] = '6d0ad83754dbb3d7c2f5ffc117255906dd3d763b5447b7c9475b3eeccadd348d'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 csrf = CSRFProtect()
 csrf.init_app(app)
@@ -20,7 +21,7 @@ app.register_blueprint(auth)
 app.register_blueprint(g_message)
 
 #SocketIO
-socketio = SocketIO(app)
+socketio = SocketIO(app, manage_session=False, logger=True, engineio_logger=True)
 
 @socketio.on('connect')
 def user_connect():
@@ -52,10 +53,9 @@ login_manager.login_view = 'auth.login_template' #Nombre de la vista de inicio d
 def load_user(id):
     user_repository = UserRepository()
     user = user_repository.get(id)
-    
+    print(user)
     if user is not None:
         g.user = user
-    
     return user
 
 @app.get('/')
@@ -65,3 +65,4 @@ def home():
 
 if __name__ == '__main__':
     socketio.run(app)
+
