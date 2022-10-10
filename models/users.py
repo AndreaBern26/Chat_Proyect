@@ -18,8 +18,8 @@ class User(Base, UserMixin):
     connected = Column(Boolean)
     is_admin = Column(Boolean, default = False)
     global_messages = relationship("GlobalMessage", back_populates = "user")
-    messages_sent = relationship("Message", foreign_keys = "[Message.user_from_id]", back_populates = "user_to")
-    messages_received = relationship("Message",  foreign_keys = "[Message.user_to_id]", back_populates = "user_from")
+    messages_sent = relationship("Message", foreign_keys = "[Message.user_from_id]", back_populates = "user_to", overlaps="user_from")
+    messages_received = relationship("Message",  foreign_keys = "[Message.user_to_id]", back_populates = "user_from", overlaps="user_to")
 
     def __init__(self, username, email, password,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -58,5 +58,4 @@ class User(Base, UserMixin):
                 'connected': self.connected,
                 'is_admin': self.is_admin
             }
-
 

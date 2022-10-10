@@ -12,8 +12,6 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 @auth.get('/login')
 def login_template():
     if current_user.is_authenticated:
-        user = User()
-        user.connected = True
         return redirect(url_for('home'))
     
     form = LoginForm()
@@ -30,10 +28,14 @@ def login():
             
             if user is not None and user.check_password(form.password.data):
                 login_user(user, remember = True)
+                # try:
+                #     user_repository.new_session()
+                # except Exception as e:
+                #     make_response(e.__str__(), 400)
                 user_repository.connected(user, True)
                 return redirect(url_for('home'))
         
-        return render_template('auth/login.html', form = form)
+        return render_template('auth/login.html', form=form)
 
     except Exception as e:
         return make_response(e.__str__(), 400)

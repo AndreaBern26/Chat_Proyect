@@ -3,10 +3,10 @@ from models.global_message import GlobalMessage
 
 class GlobalMessageRepository(AbstractRepository):
     def get(self, message_id):
-        return self.session.query(GlobalMessage).filter_by(id = message_id).one_or_none()
+        return self.session.query(GlobalMessage).filter_by(id=message_id).one_or_none()
     
     def get_by_user_id (self, user_id):
-        return self.session.query(GlobalMessage).filter_by(user_id = user_id).all()
+        return self.session.query(GlobalMessage).filter_by(user_id=user_id).one_or_none()
 
     def list(self):
         return self.session.query(GlobalMessage).all()
@@ -18,3 +18,4 @@ class GlobalMessageRepository(AbstractRepository):
     def delete(self, message: GlobalMessage):
         self.session.delete(message)
         self.session.commit()
+    

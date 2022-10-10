@@ -33,8 +33,9 @@ def global_chat():
             g_message = GlobalMessage(message, user_id)
             g_message_repository = GlobalMessageRepository()
             g_message_repository.add(g_message)
-
-        return render_template('global_chat.html', form=form)
+            
+            list = g_message_repository.list()
+        return render_template('global_chat.html', form=form, list=list)
         
     except Exception as e:
         return make_response(e.__str__(),400)
