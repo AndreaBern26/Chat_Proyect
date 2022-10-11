@@ -1,9 +1,10 @@
 from models.users import User
 import models.users
+import app
 
-from repository.abstract_repository import AbstractRepository
+class UserRepository():
+    session = app.db.session
 
-class UserRepository(AbstractRepository):
     def get(self, user_id):
         return self.session.query(User).filter_by(id=user_id).one_or_none()
     
@@ -23,3 +24,5 @@ class UserRepository(AbstractRepository):
     def connected(self, user, status: bool):
         user.conneted = status
         self.session.commit()
+
+    

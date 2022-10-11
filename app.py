@@ -1,13 +1,10 @@
+import os
+
 from flask import Flask, flash, g, render_template
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager, current_user
 from flask_socketio import SocketIO, send
-
-from blueprints.auth import auth
-from blueprints.global_message import g_message
-from models.global_message import GlobalMessage
-from repository.g_message_repository import GlobalMessageRepository
-from repository.user_repository import UserRepository
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, template_folder = "templates")
 app.config['SECRET_KEY'] = '6d0ad83754dbb3d7c2f5ffc117255906dd3d763b5447b7c9475b3eeccadd348d'
@@ -15,6 +12,16 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 csrf = CSRFProtect()
 csrf.init_app(app)
+
+db = SQLAlchemy()
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
+db.init_app(app)
+
+from blueprints.auth import auth
+from blueprints.global_message import g_message
+from models.global_message import GlobalMessage
+from repository.g_message_repository import GlobalMessageRepository
+from repository.user_repository import UserRepository
 
 #Blueprints
 app.register_blueprint(auth)
@@ -53,7 +60,7 @@ login_manager.login_view = 'auth.login_template' #Nombre de la vista de inicio d
 def load_user(id):
     user_repository = UserRepository()
     user = user_repository.get(id)
-    print(user)
+    
     if user is not None:
         g.user = user
     return user

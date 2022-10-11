@@ -1,7 +1,11 @@
-from repository.abstract_repository import AbstractRepository
 from models.global_message import GlobalMessage
 
-class GlobalMessageRepository(AbstractRepository):
+import app
+
+class GlobalMessageRepository():
+
+    session = app.db.session
+
     def get(self, message_id):
         return self.session.query(GlobalMessage).filter_by(id=message_id).one_or_none()
     

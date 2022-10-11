@@ -1,12 +1,14 @@
-from repository.abstract_repository import AbstractRepository
 from models.messages import Message
+import app
 
-class MessageRepository(AbstractRepository):
+class MessageRepository():
+    session = app.db.session
+
     def get(self, message_id):
-        return self.session.query(Message).filter_by(id = message_id).one_or_none()
+        return self.session.query(Message).filter_by(id=message_id).one_or_none()
 
     def get_by_user_id(self, user_id):
-        return self.session.query(Message).filter_by(user_id = user_id).all()
+        return self.session.query(Message).filter_by(user_id=user_id).all()
 
     def list(self):
         return self.session.query(Message).all()

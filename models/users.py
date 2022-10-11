@@ -7,19 +7,22 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models.base import Base
 
 import models.messages
+import app
 
-class User(Base, UserMixin):
+class User(app.db.Model, UserMixin):
     __tablename__ = 'users'
-    
-    id = Column(String(255), primary_key = True)
-    username = Column(String(255), unique = True, nullable=False)
-    email = Column(String(255), unique = True, nullable=False) 
-    password = Column(String(255))
-    connected = Column(Boolean)
-    is_admin = Column(Boolean, default = False)
-    global_messages = relationship("GlobalMessage", back_populates = "user")
-    messages_sent = relationship("Message", foreign_keys = "[Message.user_from_id]", back_populates = "user_to", overlaps="user_from")
-    messages_received = relationship("Message",  foreign_keys = "[Message.user_to_id]", back_populates = "user_from", overlaps="user_to")
+
+    db = app.db
+
+    id = db.Column(String(255), primary_key = True)
+    username = db.Column(db.String(255), unique = True, nullable=False)
+    email = db.Column(db.String(255), unique = True, nullable=False) 
+    password = db.Column(db.String(255))
+    connected = db.Column(db.Boolean)
+    is_admin = db.Column(db.Boolean, default = False)
+    global_messages = db.relationship("GlobalMessage", back_populates = "user")
+    # messages_sent = relationship("Message", foreign_keys = "[Message.user_from_id]", back_populates = "user_to", overlaps="user_from")
+    # messages_received = relationship("Message",  foreign_keys = "[Message.user_to_id]", back_populates = "user_from", overlaps="user_to")
 
     def __init__(self, username, email, password,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -58,4 +61,3 @@ class User(Base, UserMixin):
                 'connected': self.connected,
                 'is_admin': self.is_admin
             }
-
