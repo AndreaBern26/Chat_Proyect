@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, flash, g, render_template
 from flask_wtf import CSRFProtect
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager, current_user, login_required
 from flask_socketio import SocketIO, send
 from flask_sqlalchemy import SQLAlchemy
 
@@ -28,7 +28,7 @@ app.register_blueprint(auth)
 app.register_blueprint(g_message)
 
 #SocketIO
-socketio = SocketIO(app, manage_session=False, logger=True, engineio_logger=True)
+socketio = SocketIO(app, manage_session=False, logger=True, engineio_logger=True, cors_allowed_origins="http://127.0.0.1:5000")
 
 @socketio.on('connect')
 def user_connect():
@@ -66,10 +66,10 @@ def load_user(id):
     return user
 
 @app.get('/')
+@login_required
 def home():
     flash('You were sucessfully logged in')
     return render_template('home.html')
 
 if __name__ == '__main__':
     socketio.run(app)
-
