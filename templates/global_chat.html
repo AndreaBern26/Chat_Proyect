@@ -5,7 +5,7 @@
     <div class="container d-block">
         <h1 class="mb-3 font-weight-normal text-center mt-2">Life Chat</h1>
         <div class="container d-flex w-100 justify-content-center p-3 align-items-center">
-            <ul id="messages">
+            <ul id="messages" class="list-unstyled">
             {% for msg in list %}
                 <li>{{ msg.message }}      {{ msg.message_date}}</li>
             {% endfor %}
@@ -14,8 +14,8 @@
        
         <div class="d-flex w-100 justify-content-center p-3 align-items-center">
             <div class=" border border-1 p-5 rounded-4 bg-black">
-                <input type="text" id="myMessage">
-                <button id="send">Send</button>
+                <input type="text" id="myMessage" class="form-control-lg p-2 text-black">
+                <button id="send" class="btn btn-lg btn-warning mb-2">Send</button>
             </div>
         </div>
     </div>
