@@ -13,7 +13,7 @@ class GlobalMessageRepository():
         return self.session.query(GlobalMessage).filter_by(user_id=user_id).one_or_none()
 
     def list(self):
-        return self.session.query(GlobalMessage).all()
+        return self.session.query(GlobalMessage).order_by(GlobalMessage.message_date).all()
 
     def add(self, message: GlobalMessage):
         self.session.add(message)

@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container d-block">
         <h1 class="mb-3 font-weight-normal text-center mt-2">Life Chat</h1>
-        <div id="messages" class="container d-flex w-100 justify-content-center p-3 align-items-center">
+        <div class="messages container d-flex w-100 justify-content-center p-3 align-items-center">
             {% for msg in list %}
                 {{ msg.message }}      {{ msg.message_date}}<br/>
             {% endfor %}
@@ -15,7 +15,7 @@
                 <form action="" method="post">
                     {{ form.csrf_token }}
                     <div class="form-field mt-2 d-inline">
-                        {{ form.message(class_="form-control-lg p-2 text-black") }}
+                        {{ form.message(class_="form-control-lg p-2 text-black message") }}
                         {% for error in form.message.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
