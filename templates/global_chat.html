@@ -2,27 +2,33 @@
 {% block title %} Global chat {% endblock %}
 
 {% block content %}
-    <h1 class="mb-3 font-weight-normal text-center mt-2">Life Chat</h1>
-    <div class="messages container d-flex w-100 justify-content-center align-items-center"></div>
-    <div class="d-flex w-100 justify-content-center p-3 align-items-center">
-        <div class=" border border-1 p-5 rounded-4 bg-black">
-            <form action="{{url_for('global.global_chat')}}" method="post">
-                {{ form.csrf_token }}
-                <div class="form-field mt-2 d-inline">
-                    {{ form.message(class_="form-control-lg p-2 text-black message") }}
-                    {% for error in form.message.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
+    <div class="container d-block">
+        <h1 class="mb-3 font-weight-normal text-center mt-2">Life Chat</h1>
+        <div id="messages" class="container d-flex w-100 justify-content-center p-3 align-items-center">
+            {% for msg in list %}
+                {{ msg.message }}      {{ msg.message_date}}<br/>
+            {% endfor %}
+        </div>
+       
+        <div class="d-flex w-100 justify-content-center p-3 align-items-center">
+            <div class=" border border-1 p-5 rounded-4 bg-black">
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+                    <div class="form-field mt-2 d-inline">
+                        {{ form.message(class_="form-control-lg p-2 text-black") }}
+                        {% for error in form.message.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
 
-                <div class=" d-inline align-center">
-                    {{ form.submit(class_="submit btn btn-lg btn-warning mb-2") }}
-                </div>    
-            </form>
+                    <div class="d-inline align-center">
+                        {{ form.submit(class_="submit btn btn-lg btn-warning mb-2") }}
+                    </div>    
+                </form>
+            </div>
         </div>
     </div>
 
-    <script type="text/javascript" src="../static/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../static/js/socketio.js"></script>
-    
 {% endblock %}

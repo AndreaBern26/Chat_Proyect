@@ -7,27 +7,12 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-ffc107-200">
     <header>
         {% include '_partials/toolbar.html' %}
     </header>
-
-    <!-- <nav class="logo">
-        <label for="" class="logo"> LIFECHAT </label>
-        <ul class="Principal">
-            <li>
-                <a href="login.html">Login</a>
-            </li>
-
-            <li>
-                <a href="registro.html">Registro</a>
-            </li>
-
-        </ul>
-    </nav> -->
 
     {% block content %} {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
