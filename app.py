@@ -9,14 +9,16 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__, template_folder = "templates")
 app.config['SECRET_KEY'] = '6d0ad83754dbb3d7c2f5ffc117255906dd3d763b5447b7c9475b3eeccadd348d'
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 
 csrf = CSRFProtect()
 csrf.init_app(app)
 
 db = SQLAlchemy()
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 db.init_app(app)
-
+with app.app_context():
+    db.create_all()
+    
 from blueprints.auth import auth
 from blueprints.global_message import g_message
 from models.global_message import GlobalMessage
