@@ -70,8 +70,9 @@ def load_user(id):
 @app.get('/')
 @login_required
 def home():
+    user = current_user
     flash('You were sucessfully logged in')
-    return render_template('home.html')
+    return render_template('home.html', user=user)
 
 if __name__ == '__main__':
     socketio.run(app)
